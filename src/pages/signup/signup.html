@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Signup</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar color="test">
+    <ion-segment [(ngModel)]="users" color="light">
+      <ion-segment-button value="user">
+        User
+      </ion-segment-button>
+      <ion-segment-button value="shop">
+        Shop
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div [ngSwitch]="users">
+
+    <ion-list *ngSwitchCase="'user'">
+      <ion-row>
+        <ion-col>
+          <p class="labels">Hello, User</p>
+          <img src="assets/imgs/Userprofile.png" />
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+
+          <ion-list>
+
+            <form [formGroup]="SignupData">
+              <ion-item>
+                <ion-input type="email" placeholder="User Email" formControlName="email" 
+                [class.invalid]="!SignupData.controls.email.valid && SignupData.controls.email.touched"></ion-input>
+              </ion-item>
+              <p class="errorlabels" *ngIf="!SignupData.controls.email.valid && SignupData.controls.email.touched">
+                Please Enter the Valid Email</p>
+
+              <ion-item>
+                <ion-input type="password" placeholder="Password" formControlName="password" 
+                [class.invalid]="!SignupData.controls.password.valid && SignupData.controls.password.touched"></ion-input>
+              </ion-item>
+              <p class="errorlabels" *ngIf="!SignupData.controls.password.valid && SignupData.controls.password.touched">
+                Must contain at least 8 characters with uppercase,lowercase and numbers</p>
+
+              <ion-item>
+                <ion-input type="password" placeholder="Re-Enter Password" formControlName="passwordRetyped" 
+                [class.invalid]="!SignupData.controls.passwordRetyped.valid && SignupData.controls.passwordRetyped.touched"></ion-input>
+              </ion-item>
+              <p class="errorlabels" *ngIf="!SignupData.controls.passwordRetyped.valid && SignupData.controls.passwordRetyped.touched">
+                Must contain at least 8 characters with uppercase,lowercase and numbers</p>
+
+              <ion-col>
+                <button button ion-button round outline (click)="signup()" type="submit" color="light">Signup</button>
+              </ion-col>
+            </form>
+
+          </ion-list>
+
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+
+    <ion-list *ngSwitchCase="'shop'">
+
+      <ion-row>
+        <ion-col>
+          <p class="labels">Hello, Tailor</p>
+          <img src="assets/imgs/Tailorprofile.png" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+
+          <ion-list>
+            <form [formGroup]="SignupData2">
+              <ion-item>
+                <ion-input type="email" placeholder="Shop Email" formControlName="email2" [class.invalid]="!SignupData2.controls.email2.valid && SignupData2.controls.email2.touched"></ion-input>
+              </ion-item>
+              <p class="errorlabels" *ngIf="!SignupData2.controls.email2.valid && SignupData2.controls.email2.touched">
+                Please Enter the Valid Email</p>
+              <ion-item>
+                <ion-input type="password" placeholder="Password" formControlName="password2" [class.invalid]="!SignupData2.controls.password2.valid && SignupData2.controls.password2.touched"></ion-input>
+              </ion-item>
+              <p class="errorlabels" *ngIf="!SignupData2.controls.password2.valid && SignupData2.controls.password2.touched">
+                Must contain at least 8 characters with uppercase,lowercase and numbers</p>
+              <ion-item>
+                <ion-input type="password" placeholder="Re-Enter Password" formControlName="passwordRetyped2" [class.invalid]="!SignupData2.controls.passwordRetyped2.valid && SignupData2.controls.passwordRetyped2.touched"></ion-input>
+              </ion-item>
+              <p class="errorlabels" *ngIf="!SignupData2.controls.passwordRetyped2.valid && SignupData2.controls.passwordRetyped2.touched">
+                Must contain at least 8 characters with uppercase,lowercase and numbers</p>
+              <ion-col>
+                <button button ion-button round outline (click)="signup2()" type="submit" color="light">Signup</button>
+              </ion-col>
+            </form>
+
+          </ion-list>
+
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+  </div>
+
+
+</ion-content>

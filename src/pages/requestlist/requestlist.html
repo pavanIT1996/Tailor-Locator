@@ -1,0 +1,187 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Requests </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <!-- User -->
+  <div *ngIf="type==='user'">
+    <P class="labels2">My Request List</P>
+    <p class="error2" *ngIf="measurements2.length===0">No Requests Yet!!!..</p>
+    <div *ngFor="let measurement of measurements2;let i=index">
+      <ion-list *ngFor="let shop of shops">
+        <ion-item-sliding *ngIf="measurement.shop===shop.id">
+          <ion-item *ngIf="measurement.Status==='' || measurement.Status==='Accepted'">
+            <div>
+              <ion-badge *ngIf="measurement.Status==='Accepted'" color="secondary">{{measurement.Status}}</ion-badge>
+              <ion-badge *ngIf="measurement.Status===''" color="primary">Pending</ion-badge>
+              <ion-badge *ngIf="measurement.Status==='Rejected'" color="danger">{{measurement.Status}}</ion-badge>
+            </div>
+            <div class="labels4">
+              {{shop.Shopname}}
+            </div>
+            <div class="labels0">No: {{i+1}}</div>
+            <div class="labels4">
+              Dress : {{measurement.dress}}
+            </div>
+            <div class="labels4">
+              Material : {{measurement.material}}
+            </div>
+            <div class="labels4">
+              Color : {{measurement.color}}
+            </div>
+            <div class="labels4">
+              Size : {{measurement.size}}
+            </div>
+            <div class="labels5">
+              Due Date : {{measurement.date}}
+            </div>
+            <div class="labels5">
+              Note : {{measurement.note}}
+            </div>
+            <div class="labels3">
+              Posted Date: {{measurement.posteddate}}
+            </div>
+            <div class="labels3">
+              Posted Time:{{measurement.postedtime}}
+            </div>
+            <button ion-button (click)="call(shop.contact)">
+              <ion-icon name="call"></ion-icon>
+            </button>
+          </ion-item>
+          <ion-item-options side="right">
+
+            <button color="danger" ion-button (click)="delete(measurement.key)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+
+          </ion-item-options>
+
+          <ion-item-options side="left">
+
+            <button ion-button (click)="update(measurement.key)">
+              <ion-icon name="create"></ion-icon>
+            </button>
+
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+
+    <!-- Rejected List -->
+    <div *ngFor="let measurement of measurements2;let i=index">
+      <ion-list *ngFor="let shop of shops">
+        <ion-item-sliding>
+          <ion-item *ngIf="measurement.Status==='Rejected' && measurement.shop===shop.id">
+            <div>
+              <ion-badge *ngIf="measurement.Status==='Accepted'" color="secondary">{{measurement.Status}}</ion-badge>
+              <ion-badge *ngIf="measurement.Status===''" color="primary">Pending</ion-badge>
+              <ion-badge *ngIf="measurement.Status==='Rejected'" color="danger">{{measurement.Status}}</ion-badge>
+            </div>
+            <div class="labels4">
+              {{shop.Shopname}}
+            </div>
+            <div class="labels0">No: {{i+1}}</div>
+            <div class="labels4">
+              Dress : {{measurement.dress}}
+            </div>
+            <div class="labels4">
+              Material : {{measurement.material}}
+            </div>
+            <div class="labels4">
+              Color : {{measurement.color}}
+            </div>
+            <div class="labels4">
+              Size : {{measurement.size}}
+            </div>
+            <div class="labels5">
+              Due Date : {{measurement.date}}
+            </div>
+            <div class="labels5">
+              Note : {{measurement.note}}
+            </div>
+            <div class="labels3">
+              Posted Date: {{measurement.posteddate}}
+            </div>
+            <div class="labels3">
+              Posted Time:{{measurement.postedtime}}
+            </div>
+          </ion-item>
+          <ion-item-options side="right">
+
+            <button color="danger" ion-button (click)="delete(measurement.key)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+  </div>
+
+
+  <!-- Admin -->
+  <div *ngIf="type==='admin'">
+    <P class="labels2">List of requests</P>
+    <p class="error2" *ngIf="measurements.length===0">No Requests Yet!!!..</p>
+    <ion-list *ngFor="let measurement of measurements;let i=index;">
+      <ion-item *ngIf="measurement.Status==='' || measurement.Status==='Accepted'">
+        <div *ngIf="measurement.Status">
+          <ion-badge *ngIf="measurement.Status==='Accepted'" color="secondary">{{measurement.Status}}</ion-badge>
+          <ion-badge *ngIf="measurement.Status==='Rejected'" color="danger">{{measurement.Status}}</ion-badge>
+        </div>
+        <div class="labels0">No: {{i+1}}</div>
+        <div class="labels4">
+          Dress : {{measurement.dress}}
+        </div>
+        <div class="labels4">
+          Material : {{measurement.material}}
+        </div>
+        <div class="labels4">
+          Color : {{measurement.color}}
+        </div>
+        <div class="labels4">
+          Size : {{measurement.size}}
+        </div>
+        <div class="labels5">
+          Due Date : {{measurement.date}}
+        </div>
+        <div class="labels5">
+          Note : {{measurement.note}}
+        </div>
+        <div class="labels3">
+          Posted Date: {{measurement.posteddate}}
+        </div>
+        <div class="labels3">
+          Posted Time:{{measurement.postedtime}}
+        </div>
+        <ion-buttons>
+          <button color="secondary" ion-button (click)="Accept(measurement?.key)" left>
+            <ion-icon name="checkmark-circle"> Accept</ion-icon>
+          </button>
+          <button color="danger" ion-button (click)="Reject(measurement.key)" right>
+            <ion-icon name="close-circle"> Reject</ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- User -->
+  <ion-fab bottom right *ngIf="type==='user'">
+    <button ion-fab fab-size color="but" (click)="GotoAddmeasurementPage()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>

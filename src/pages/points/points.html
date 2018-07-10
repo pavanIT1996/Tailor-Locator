@@ -1,0 +1,46 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Points</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-row>
+    <ion-col>
+      <circle-progress [percent]="progress" [radius]="110" [outerStrokeWidth]="16" [innerStrokeWidth]="20" [outerStrokeColor]="'#F6EB06'"
+        [innerStrokeColor]="'#B85230'" [animation]="true" [animationDuration]="500"></circle-progress>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <p class="labels2">Points Table</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="labels">
+    <ion-col> Your Points : {{points}} </ion-col>
+  </ion-row>
+  <ion-row class="labels">
+    <ion-col> Total Points : 1000 </ion-col>
+  </ion-row>
+  <ion-row class="labels3">
+    <ion-col> Add </ion-col>
+    <ion-col>
+      <ion-badge color="primary"> +3 Points</ion-badge>
+    </ion-col>
+  </ion-row>
+  <ion-row class="labels3">
+    <ion-col> Update </ion-col>
+    <ion-col><ion-badge color="secondary">-1 Points</ion-badge></ion-col>
+  </ion-row>
+  <ion-row class="labels3">
+    <ion-col> Delete </ion-col>
+    <ion-col><ion-badge color="danger"> -2 Points</ion-badge></ion-col>
+  </ion-row>
+
+</ion-content>

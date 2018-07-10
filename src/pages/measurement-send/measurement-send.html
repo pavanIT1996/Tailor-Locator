@@ -1,0 +1,153 @@
+<ion-header>
+
+  <!-- Update Requests -->
+  <div *ngIf="val===1">
+    <ion-navbar>
+      <ion-title>Update Requests</ion-title>
+    </ion-navbar>
+  </div>
+
+  <!-- Send Request -->
+  <div *ngIf="val===0">
+    <ion-navbar>
+      <ion-title>Send Requests</ion-title>
+      <ion-buttons right>
+        <button ion-button (click)="close()">Cancel</button>
+      </ion-buttons>
+    </ion-navbar>
+  </div>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <!-- Send Requests -->
+  <div *ngIf="val===0">
+
+    <ion-item>
+      <ion-label>Tailor shop: </ion-label>
+      <ion-select [(ngModel)]="shop">
+        <ion-option value="{{shop.id}}" *ngFor="let shop of user">{{shop.Shopname}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Dress: </ion-label>
+      <ion-select [(ngModel)]="dress">
+        <ion-option value="{{clothe.name}}" *ngFor="let clothe of clothes">{{clothe.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Material: </ion-label>
+      <ion-select [(ngModel)]="material">
+        <ion-option value="{{material.name}}" *ngFor="let material of materials">{{material.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label class="primarylabel">Color</ion-label>
+      <ion-select [(ngModel)]="color">
+        <ion-option *ngFor="let optioncolor of colors" [value]="optioncolor.name">{{optioncolor.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Due Date: </ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MMMM DDDD YYYY" [min]="myMinDate" [(ngModel)]="myDate"></ion-datetime>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Size: </ion-label>
+        <ion-select [(ngModel)]="size">
+          <ion-option value="{{size.name}}" *ngFor="let size of sizes">{{size.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label>Note: </ion-label>
+      <ion-textarea [(ngModel)]="note" name="note" autocomplete="on" autocorrect="on" placeholder="Quantity & other additional details mention here"
+        clearInput>
+      </ion-textarea>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button (click)="send()" color="light" round outline>Send Measurements</button>
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+  <!-- Update Requests -->
+  <div *ngIf="val===1">
+
+    <ion-list *ngFor="let value of array">
+      <ion-item>
+        <ion-label>Tailor shop: </ion-label>
+        <ion-select [(ngModel)]="value.shop">
+          <ion-option value="{{shop.id}}" *ngFor="let shop of user">{{shop.Shopname}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Dress: </ion-label>
+        <ion-select [(ngModel)]="value.dress">
+          <ion-option value="{{clothe.name}}" *ngFor="let clothe of clothes">{{clothe.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Material: </ion-label>
+        <ion-select [(ngModel)]="value.material">
+          <ion-option value="{{material.name}}" *ngFor="let material of materials">{{material.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label class="primarylabel">Color</ion-label>
+        <ion-select [(ngModel)]="value.color">
+          <ion-option *ngFor="let optioncolor of colors" [value]="optioncolor.name">{{optioncolor.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Due Date: </ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MMMM DDDD YYYY" [min]="myMinDate" [(ngModel)]="value.myDate"></ion-datetime>
+      </ion-item>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>Size: </ion-label>
+          <ion-select [(ngModel)]="value.size">
+            <ion-option value="{{size.name}}" *ngFor="let size of sizes">{{size.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <ion-item>
+        <ion-label>Note: </ion-label>
+        <ion-textarea [(ngModel)]="value.note" name="note" autocomplete="on" autocorrect="on" placeholder="Quantity & other additional details mention here"
+          clearInput>
+        </ion-textarea>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="update(value)" color="light" round outline>Update Measurements</button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </div>
+
+
+</ion-content>

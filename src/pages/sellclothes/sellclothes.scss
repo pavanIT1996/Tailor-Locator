@@ -1,0 +1,58 @@
+page-sellclothes {
+    .scroll-content {
+        background-color: #DC7633;
+    }
+    img {
+        height: 50vh;
+        width: 50vh;
+        margin: auto;
+        display: grid;
+    }
+    .error2 {
+        font-size: 1.0em;
+        color: white;
+        font-weight: bolder;
+        align-items: center;
+        text-align: center;
+        background-color: red;
+    }
+    ion-item {
+        background-color: #DC7633;
+        align-items: center;
+        text-align: center;
+    }
+    ion-card {
+        outline-color: black;
+        outline-style: solid;
+        outline-width: 0.3em; // height: 50vh;
+        // width: 50vh;
+    }
+    ion-card-header {
+        background-color: black;
+        align-items: center;
+        text-align: center;
+        color: white;
+    }
+    ion-card-content {
+        background-color: #DC7633;
+        text-align: center;
+        color: white;
+    }
+    .labels {
+        font-size: 1.3em;
+        color: white;
+        font-weight: 800;
+        align-items: center;
+        text-align: center;
+    }
+    .labels2 {
+        font-size: 1.0em;
+        color: white;
+        font-weight: 500;
+        align-items: center;
+        text-align: center;
+    }
+    ion-row {
+        background-color: #D15B0D;
+    }
+}

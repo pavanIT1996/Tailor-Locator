@@ -1,0 +1,29 @@
+page-setup {
+    .scroll-content {
+        background-color: #DC7633;
+    }
+    ion-row {
+        align-items: center;
+        text-align: center;
+    }
+    .labels {
+        font-size: 1.2em;
+        color: white;
+    }
+    .invalid {
+        border-bottom: 5px solid rgb(255, 83, 91);
+    }
+    .errorlabels {
+        border-radius: 10px !important;
+        opacity: 0.7;
+        font-size: 1.0em;
+        font-weight: bold;
+        background-color: red;
+        color: white;
+        border-color: white;
+        border-style: solid;
+        border-width: 0.3em;
+        align-items: center;
+        text-align: center;
+    }
+}

@@ -1,0 +1,76 @@
+<ion-content padding>
+  <ion-navbar></ion-navbar>
+
+  <ion-row>
+    <ion-col>
+      <img src="assets/imgs/login.png" />
+      <p class="labels">TailorLocator</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+
+      <ion-list>
+        <form [formGroup]="loggedData">
+          <ion-item>
+            <ion-input type="email" value="{{email}}" placeholder="Email"  formControlName="email" 
+            [class.invalid]="!loggedData.controls.email.valid && loggedData.controls.email.touched" clearInput></ion-input>
+          </ion-item>
+          <p class="errorlabels"  
+          *ngIf="!loggedData.controls.email.valid && loggedData.controls.email.touched">
+          Please Enter the Valid Email</p>
+
+          <ion-item>
+            <ion-input type="password" value="{{pwd}}" placeholder="Password" formControlName="password" 
+            [class.invalid]="!loggedData.controls.password.valid && loggedData.controls.password.touched"clearInput></ion-input>
+          </ion-item>
+          <p class="errorlabels" 
+          *ngIf="!loggedData.controls.password.valid && loggedData.controls.password.touched">
+          Must contain at least 8 characters with uppercase,lowercase and numbers</p>
+        
+          <ion-col>
+            <button button ion-button round outline (click)="login()" type="submit" color="light">Login</button>
+          </ion-col>
+        </form>
+        <ion-row>
+          <ion-col>
+            <button ion-label class="other-button" href="#" (click)="forget()">Forget</button>
+            <ion-col></ion-col>
+            <label ion-label class="other-button">|</label>
+            <ion-col></ion-col>
+            <button ion-label class="other-button" href="#" (click)="signup()">Register</button>
+          </ion-col>
+        </ion-row>
+
+        <button ion-button (click)="test1()">Admin1</button>
+        <button ion-button (click)="test2()">Admin2</button>
+        <button ion-button (click)="test()">user</button>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<!--<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+
+  <ion-item>
+    <ion-label stacked>Phone Number</ion-label>
+    <ion-input type="number" [(ngModel)]="phoneNumber"></ion-input>
+  </ion-item>
+  
+  <button ion-button id="sign-in-button" (click)="signIn(phoneNumber)">
+    Sign In
+  </button>
+
+  <div id="recaptcha-container"></div>
+
+</ion-content>-->

@@ -1,0 +1,66 @@
+<ion-header>
+
+    <ion-navbar>
+
+        <ion-title>Map</ion-title>
+
+        <ion-buttons end>
+            <button ion-button (click)="close()">Cancel</button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="query" (ionInput)="searchPlace()"></ion-searchbar>
+    </ion-toolbar>
+
+    <ion-list>
+        <ion-item *ngFor="let place of places" tappable (click)="selectPlace(place)">{{place.description}}</ion-item>
+    </ion-list>
+
+
+</ion-header>
+
+<ion-content>
+
+    <!-- <div *ngIf="type==='user'">
+        <ion-card>
+            <ion-card-content>
+                <div #directionsPanel></div>
+            </ion-card-content>
+        </ion-card>
+    </div> -->
+
+
+    <div #pleaseConnect id="please-connect">
+        <p>Please connect to the Internet...</p>
+    </div>
+
+    <div #map id="map">
+        <ion-spinner></ion-spinner>
+    </div>
+    <div *ngIf="type==='user'">
+        <ion-row>
+            <ion-col>
+                <button ion-button (click)="NearBy()" color="light" round outline>Near by</button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>
+
+<!-- Admin -->
+<ion-footer  *ngIf="type==='admin'">
+    <ion-toolbar>
+        <ion-buttons>
+            <button ion-button (click)="Add()">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+            <button ion-button (click)="Clear()">
+                <ion-icon name="remove-circle"></ion-icon>
+            </button>
+            <button [disabled]="saveDisabled" ion-button (click)="save()">
+                <ion-icon name="checkmark-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

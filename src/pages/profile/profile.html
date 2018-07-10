@@ -1,0 +1,94 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Profile</ion-title>
+    <ion-buttons *ngIf="value===1" right>
+      <button ion-button (click)="close()">Cancel</button>
+    </ion-buttons>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+
+  <!--User Profile -->
+  <div *ngIf="type==='user'">
+
+    <ion-list *ngFor="let user of users">
+      <ion-card color="hig">
+
+        <!-- <button ion-button (click)="presentActionSheet()" color="light" block outline>Update Profile Picture</button> -->
+
+        <img [src]="user.image" *ngIf="user.image && !imageURL2" />
+        <!-- <img [src]="imageURL2" *ngIf="imageURL2" /> -->
+        <img src="assets/imgs/Userprofile.png" *ngIf="!user.image && !imageURL2" />
+        <!-- <button ion-button (click)="upload()" *ngIf="imageURL2" block>Upload</button> -->
+        <ion-card-content>
+          <p>Email : </p>
+          <ion-badge>{{user.email}}</ion-badge>
+
+          <p>Type : </p>
+          <ion-badge>{{user.type}}</ion-badge>
+
+          <p>Username : </p>
+          <ion-badge>{{user.username}}</ion-badge>
+
+          <p>Contact : </p>
+          <ion-badge>{{user.contact}}</ion-badge>
+
+        </ion-card-content>
+
+      </ion-card>
+      <ion-fab right top>
+        <button ion-fab (click)="update(3)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-fab>
+    </ion-list>
+  </div>
+
+
+  <!--Tailor Profile -->
+  <div *ngIf="type==='admin'">
+    <ion-list *ngFor="let tailor of users">
+      <ion-card color="hig">
+
+        <!-- <button ion-button (click)="presentActionSheet()" color="light" block outline>Update Profile Picture</button> -->
+
+        <img [src]="tailor.Shopimage" *ngIf="tailor.Shopimage" />
+        <!-- <img [src]="imageURL2" *ngIf="imageURL2" /> -->
+        <img src="assets/imgs/Tailorprofile.png" *ngIf="!tailor.Shopimage" />
+        <!-- <button ion-button (click)="upload()" *ngIf="imageURL2" block>Upload</button> -->
+        <ion-card-content>
+          <p>Name : </p>
+          <ion-badge>{{tailor.Shopname}}</ion-badge>
+
+          <p>Email : </p>
+          <ion-badge>{{tailor.email}}</ion-badge>
+
+          <p>Location : </p>
+          <ion-badge>Name: {{tailor.Location}}</ion-badge>
+          <ion-badge>Longitude: {{tailor.Shoplongitude}}</ion-badge>
+          <ion-badge>Latitude: {{tailor.Shoplatitude}}</ion-badge>
+
+          <p>Note: </p>
+          <ion-badge>{{tailor.Shopnote}}</ion-badge>
+
+          <p>Contact: </p>
+          <ion-badge>{{tailor.contact}}</ion-badge>
+
+        </ion-card-content>
+
+      </ion-card>
+      <ion-fab right top>
+        <button ion-fab (click)="update(1)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-fab>
+    </ion-list>
+
+  </div>
+
+
+</ion-content>

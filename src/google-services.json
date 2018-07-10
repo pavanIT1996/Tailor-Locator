@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "69624975930",
+    "firebase_url": "https://tailorlocator-1d8e7.firebaseio.com",
+    "project_id": "tailorlocator-1d8e7",
+    "storage_bucket": "tailorlocator-1d8e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69624975930:android:ac13890e062de1c2",
+        "android_client_info": {
+          "package_name": "com.tailorlocator.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69624975930-1obei8abqnjgmevvrksq6mj750nh70he.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tailorlocator.starter",
+            "certificate_hash": "11986fa1fc76fe907eb01a19dcc8c1a3e8997767"
+          }
+        },
+        {
+          "client_id": "69624975930-den4711ml4rkba6u4k94i3ov4tmi4jt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJniwAkLk2GqX4PRG0tYKO9vblg2LcGgY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69624975930-den4711ml4rkba6u4k94i3ov4tmi4jt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

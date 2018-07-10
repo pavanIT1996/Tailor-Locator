@@ -1,0 +1,25 @@
+<ion-content padding>
+  <ion-navbar></ion-navbar>
+  <ion-row>
+    <ion-col>
+      <p class="labels">Oops, Forget it</p>
+      <img src="assets/imgs/forgot.png" />
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <form [formGroup]="ForgetData">
+          <ion-item>
+            <ion-input type="email" placeholder="Email" value="{{email}}" formControlName="email" [class.invalid]="!ForgetData.controls.email.valid && ForgetData.controls.email.touched"></ion-input>
+          </ion-item>
+          <p class="errorlabels" *ngIf="!ForgetData.controls.email.valid && ForgetData.controls.email.touched">
+            Please Enter the Valid Email</p>
+          <ion-col>
+            <button button ion-button round outline color="light" (click)="reset()">Send</button>
+          </ion-col>
+        </form>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>

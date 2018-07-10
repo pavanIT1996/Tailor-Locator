@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar>
+
+    <ion-title>Home</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <ion-item *ngFor="let user of user" (click)="goprofile()">
+    <ion-avatar item-start>
+      <img [src]="user.image" *ngIf="user.image" />
+      <img [src]="user.Shopimage" *ngIf="user.Shopimage" />
+      <img src="assets/imgs/Userprofile.png" *ngIf="user.image===''" />
+      <img src="assets/imgs/Tailorprofile.png" *ngIf="user.Shopimage===''" />
+      <ion-badge color="danger">{{type}}</ion-badge>
+    </ion-avatar>
+    <p class="labels3" *ngIf="timeval===1">Good Morning!!!</p>
+    <p class="labels3" *ngIf="timeval===2">Good Afternoon!!!</p>
+    <p class="labels3" *ngIf="timeval===3">Good Evening!!!</p>
+    <p class="labels3" *ngIf="timeval===4">Good Night!!!</p>
+    
+    <ion-badge *ngIf="user.Shopname===''">{{user.email}}</ion-badge>
+    <ion-badge *ngIf="user.Shopname!==''">{{user.Shopname}}</ion-badge>
+
+    <ion-badge *ngIf="user.username===''">{{user.email}}</ion-badge>
+    <ion-badge *ngIf="user.username!==''">{{user.username}}</ion-badge>
+    <p class="labels3">Have a nice day!!!</p>
+  </ion-item>
+
+  <P class="labels2">Welcome to TailorLocator</P>
+
+  <div *ngIf="type==='user'">
+
+    <ion-row>
+        <ion-col>
+          <ion-card (click)="golocations()">
+            <ion-card-header>
+              <p class="labels">Go To Tailors!!!</p>
+            </ion-card-header>
+            <img src="assets/imgs/location.png" />
+            <ion-card-content>
+              <button button ion-button round outline color="dark">Go To Tailors</button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+  </div>
+
+
+
+  <div *ngIf="type==='admin'">
+
+      <ion-row>
+          <ion-col>
+            <ion-card (click)="golocations()">
+              <ion-card-header>
+                <p class="labels">Go To Tailors!!!</p>
+              </ion-card-header>
+              <img src="assets/imgs/location.png" />
+              <ion-card-content>
+                <button button ion-button round outline color="dark">Go To Tailors</button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+    
+  </div>
+
+</ion-content>

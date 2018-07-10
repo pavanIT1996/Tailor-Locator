@@ -1,0 +1,8 @@
+{
+  "name": "TailorLocator",
+  "app_id": "c3fe9781",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

@@ -1,0 +1,60 @@
+page-measurement-send {
+    .scroll-content {
+        background-color: #DC7633;
+    }
+    .labels2 {
+        font-size: 2.0em;
+        color: white;
+        font-weight: bolder;
+        align-items: center;
+        text-align: center;
+    }
+    ion-row {
+        align-items: center;
+        text-align: center;
+    }
+
+    .colorselect {
+        .select-text {
+            width: 75px;
+            border-radius: 5px;
+        }
+    
+        .alert-radio-inner,
+        .alert-radio-icon,
+        .alert-radio-label {
+            display: none;
+        }
+    
+        &.colorselected:before {
+            content: '\2713';
+            outline-color: black;
+            outline-style: solid;
+            outline-width: 0.2em;
+            color: black;
+            z-index: 999999;
+            width: 100%;
+            height: 100%;
+            font-size: 33px;
+            left: 50%;
+            top: 50%;
+            position: relative;
+            transform: translate(-50%);
+        }
+
+     
+    
+        $colorsToSelect: "#17202A" "#FDFEFE" "#C0392B" "#F6EB06" "#0237f1" "#0d8bcd" "#16aca4" "#3c887e" "#157145" "#57a773" "#88aa3d" "#b7990d" "#fcbf55" "#ff8668" "#ff5c6a" "#c2454c" "#c2183f" "#d8226b" "#8f2d56" "#482971" "#000000" "#561f37" "#433835" "#797979" "#819595";
+    
+        @each $colorOption in $colorsToSelect {
+            $colorWithoutHash: str-slice($colorOption, 2, 7);
+    
+            &.color_#{$colorWithoutHash} {
+                &, & .select-text {
+                    color: #{$colorOption};
+                    background-color: #{$colorOption};
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,162 @@
+<ion-header>
+
+  <!-- Update Clothes -->
+  <div *ngIf="val===1">
+    <ion-navbar>
+      <ion-title>Update clothes</ion-title>
+    </ion-navbar>
+  </div>
+
+  <!-- Add Clothes -->
+  <div *ngIf="val===0">
+    <ion-navbar>
+      <ion-title>Add clothes</ion-title>
+      <ion-buttons right>
+        <button ion-button (click)="close()">Cancel</button>
+      </ion-buttons>
+    </ion-navbar>
+  </div>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <!-- Add Clothes -->
+  <div *ngIf="val===0">
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label>Name: </ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Image: </ion-label>
+      </ion-item>
+
+      <ion-card>
+        <button ion-button (click)="presentActionSheet()" color="dark" block outline>Add Clothe Picture</button>
+
+        <img [src]="imageURL" *ngIf="imageURL && !imageURL2" />
+        <img [src]="imageURL2" *ngIf="imageURL2" />
+        <img src="assets/imgs/Clothes.png" *ngIf="!imageURL && !imageURL2" />
+        <!-- <button ion-button (click)="upload()" *ngIf="imageURL2" block>Upload</button> -->
+      </ion-card>
+
+      <ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-select [(ngModel)]="gender" multiple="true" cancelText="Cancel" okText="Okay">
+          <ion-option value="Male">Male</ion-option>
+          <ion-option value="Female">Female</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Size: </ion-label>
+        <ion-select [(ngModel)]="size">
+          <ion-option value="Small">Small</ion-option>
+          <ion-option value="Medium">Medium</ion-option>
+          <ion-option value="Large">Large</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Type: </ion-label>
+        <ion-select [(ngModel)]="type" multiple="true" cancelText="Cancel" okText="Okay">
+          <ion-option value="Sell">Sell</ion-option>
+          <ion-option value="Rent">Rent</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Price: </ion-label>
+        <ion-input type="number" name="price" [(ngModel)]="price"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Note: </ion-label>
+        <ion-textarea [(ngModel)]="note" name="note" autocomplete="on" autocorrect="on" placeholder="Material,Quantity & Color mention here"clearInput>
+        </ion-textarea>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="addToSale()" color="light" round outline>Add to Sale</button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+  </div>
+
+
+  <!-- Update Clothes -->
+  <div *ngIf="val===1">
+
+    <ion-list *ngFor="let value of array">
+
+      <ion-item>
+        <ion-label>Name: </ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="value.name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Image: </ion-label>
+      </ion-item>
+
+      <ion-card>
+        <button ion-button (click)="presentActionSheet()" color="dark" block outline>Add Clothe Picture</button>
+        <img [src]="value.image" *ngIf="value.image && !imageURL2" />
+        <img [src]="imageURL2" *ngIf="imageURL2" />
+        <img src="assets/imgs/Clothes.png" *ngIf="!value.image && !imageURL2" />
+        <!-- <button ion-button (click)="upload()" *ngIf="imageURL2" block>Upload</button> -->
+      </ion-card>
+
+      <ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-select [(ngModel)]="value.gender" multiple="true" cancelText="Cancel" okText="Okay">
+          <ion-option value="Male">Male</ion-option>
+          <ion-option value="Female">Female</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Size: </ion-label>
+        <ion-select [(ngModel)]="value.size">
+          <ion-option value="Small">Small</ion-option>
+          <ion-option value="Medium">Medium</ion-option>
+          <ion-option value="Large">Large</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Type: </ion-label>
+        <ion-select [(ngModel)]="value.type" multiple="true" cancelText="Cancel" okText="Okay">
+          <ion-option value="Sell">Sell</ion-option>
+          <ion-option value="Rent">Rent</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Price: </ion-label>
+        <ion-input type="number" name="price" [(ngModel)]="value.price"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Note: </ion-label>
+        <ion-textarea [(ngModel)]="value.note" name="note" autocomplete="on" autocorrect="on" placeholder="Material,Quantity & Color mention here"clearInput>
+        </ion-textarea>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="updateSale(value)" color="light" round outline>Update</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+    
+  </div>
+
+</ion-content>

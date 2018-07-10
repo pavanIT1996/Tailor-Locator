@@ -1,0 +1,213 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Clothes</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <!-- User -->
+  <div *ngIf="type==='user'">
+    <ion-toolbar>
+      <ion-searchbar [(ngModel)]="terms" placeholder="Clothe Name"></ion-searchbar>
+      <ion-buttons>
+        <div *ngIf="!descending">
+          <button ion-button type="button" (click)="sort()">Ascending Order</button>
+        </div>
+        <div *ngIf="descending">
+          <button ion-button type="button" (click)="sort()">Descending Order</button>
+        </div>
+      </ion-buttons>
+    </ion-toolbar>
+  </div>
+
+</ion-header>
+
+
+<ion-content>
+
+  <!-- Admin -->
+  <div *ngIf="type==='admin'">
+
+    <ion-toolbar color="test">
+      <ion-segment [(ngModel)]="clothes" color="light">
+        <ion-segment-button value="private">
+          Private
+        </ion-segment-button>
+        <ion-segment-button value="public">
+          Public
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+
+
+    <div [ngSwitch]="clothes">
+      <!-- Private -->
+      <ion-list *ngSwitchCase="'private'">
+        <p class="error2" *ngIf="privateclothes.length===0">No Clothes to Show!!!..</p>
+        <div *ngFor="let seller of sellers">
+          <ion-slides pager="true">
+            <ion-slide *ngFor="let clothe of privateclothes">
+              <ion-list *ngIf="seller.id===clothe.uid">
+                <ion-item>
+                  <ion-card>
+                    <ion-item color="hig">
+                      <ion-avatar item-start>
+                        <img [src]="seller.Shopimage" *ngIf="seller.Shopimage" />
+                        <img src="assets/imgs/Tailorprofile.png" *ngIf="seller.Shopimage===''" />
+                      </ion-avatar>
+                      <div>
+                        <ion-badge color="dark" *ngIf="seller.Shopname">{{seller.Shopname}}</ion-badge>
+                        <ion-badge color="dark" *ngIf="seller.Shopname===''">{{seller.email}}</ion-badge>
+                      </div>
+                      <div>
+                        <ion-badge color="dark">{{clothe.date}}</ion-badge>
+                        <ion-note>Date</ion-note>
+                      </div>
+                      <div>
+                        <ion-badge color="dark">{{clothe.time}}</ion-badge>
+                        <ion-note>Time</ion-note>
+                      </div>
+                    </ion-item>
+                    <ion-card-header>
+                      <p class="labels">{{clothe.name}}</p>
+                      <ion-fab left>
+                        <button ion-fab fab-size color="secondary" (click)="update(clothe.key)">
+                          <ion-icon name="create"></ion-icon>
+                        </button>
+                      </ion-fab>
+                      <ion-fab right>
+                        <button ion-fab fab-size color="danger" (click)="delete(clothe.key)">
+                          <ion-icon name="trash"></ion-icon>
+                        </button>
+                      </ion-fab>
+                    </ion-card-header>
+                    <img [src]="clothe.image" *ngIf="clothe.image" />
+                    <ion-card-content>
+                      <p icon-left clear small>
+                        <ion-badge color="danger">Price: Rs. {{clothe.price}}
+                          <ion-icon name="pricetag"></ion-icon>
+                        </ion-badge>
+                      </p>
+                      <p class="labels2">Size: {{clothe.size}}</p>
+                      <p class="labels2">Gender: {{clothe.gender}}</p>
+                      <p class="labels2">Type: {{clothe.type}}</p>
+                    </ion-card-content>
+                    <ion-row>
+                      <ion-col>
+                        <p class="labels2">{{clothe.note}}</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-card>
+                </ion-item>
+              </ion-list>
+            </ion-slide>
+          </ion-slides>
+        </div>
+      </ion-list>
+
+      <!-- public -->
+      <ion-list *ngSwitchCase="'public'">
+        <p class="error2" *ngIf="publicclothes.length===0">No Clothes to Show!!!..</p>
+        <div *ngFor="let seller of sellers">
+          <ion-slides pager="true">
+            <ion-slide *ngFor="let clothe of publicclothes">
+              <ion-list *ngIf="seller.id===clothe.uid">
+                <ion-item>
+                  <ion-card>
+                    <ion-item color="hig">
+                      <ion-avatar item-start>
+                        <img [src]="seller.Shopimage" *ngIf="seller.Shopimage" />
+                        <img src="assets/imgs/Tailorprofile.png" *ngIf="seller.Shopimage===''" />
+                      </ion-avatar>
+                      <div>
+                        <ion-badge color="dark" *ngIf="seller.Shopname">{{seller.Shopname}}</ion-badge>
+                        <ion-badge color="dark" *ngIf="seller.Shopname===''">{{seller.email}}</ion-badge>
+                      </div>
+                      <div>
+                        <ion-badge color="dark">{{clothe.date}}</ion-badge>
+                        <ion-note>Date</ion-note>
+                      </div>
+                      <div>
+                        <ion-badge color="dark">{{clothe.time}}</ion-badge>
+                        <ion-note>Time</ion-note>
+                      </div>
+                    </ion-item>
+                    <ion-card-header>
+                      <p class="labels">{{clothe.name}}</p>
+                    </ion-card-header>
+                    <img [src]="clothe.image" *ngIf="clothe.image" />
+                    <ion-card-content>
+                      <p icon-left clear small>
+                        <ion-badge color="danger">Price: Rs. {{clothe.price}}
+                          <ion-icon name="pricetag"></ion-icon>
+                        </ion-badge>
+                      </p>
+                      <p class="labels2">Size: {{clothe.size}}</p>
+                      <p class="labels2">Gender: {{clothe.gender}}</p>
+                      <p class="labels2">Type: {{clothe.type}}</p>
+                    </ion-card-content>
+                    <ion-row>
+                      <ion-col>
+                        <p class="labels2">{{clothe.note}}</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-card>
+                </ion-item>
+              </ion-list>
+            </ion-slide>
+          </ion-slides>
+        </div>
+      </ion-list>
+    </div>
+  </div>
+
+
+
+  <!-- User Market Display -->
+  <div *ngIf="type==='user'">
+    <p class="error2" *ngIf="allclothes.length===0">No Clothes to Show!!!..</p>
+    <ion-slides pager="true">
+      <ion-slide *ngFor="let clothe of allclothes | search : terms | sort: {property: column, order: order}">
+        <ion-card>
+          <ion-card-header>
+            <p class="labels">{{clothe.name}}</p>
+          </ion-card-header>
+          <img [src]="clothe.image" *ngIf="clothe.image" />
+          <ion-card-content>
+            <p icon-left clear small>
+              <ion-badge color="danger">Price: Rs. {{clothe.price}}
+                <ion-icon name="pricetag"></ion-icon>
+              </ion-badge>
+            </p>
+            <p class="labels2">Size: {{clothe.size}}</p>
+            <p class="labels2">Gender: {{clothe.gender}}</p>
+            <p class="labels2">Type: {{clothe.type}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <p class="labels2">{{clothe.note}}</p>
+              <div>
+                <ion-badge color="dark">{{clothe.date}}</ion-badge>
+                <ion-note>Date</ion-note>
+              </div>
+              <div>
+                <ion-badge color="dark">{{clothe.time}}</ion-badge>
+                <ion-note>Time</ion-note>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-fab bottom right *ngIf="type==='admin'">
+    <button ion-fab fab-size color="but" (click)="GotoAddclothesPage()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

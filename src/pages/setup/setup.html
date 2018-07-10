@@ -1,0 +1,247 @@
+<ion-header>
+  <!-- Shop Add -->
+  <div *ngIf="val===0">
+    <ion-navbar>
+      <ion-title>Add Shop details</ion-title>
+    </ion-navbar>
+  </div>
+<!-- Shop Update -->
+  <div *ngIf="val===1">
+    <ion-navbar>
+      <ion-title>Update Shop details</ion-title>
+    </ion-navbar>
+  </div>
+<!-- Profile Add -->
+  <div *ngIf="val===2">
+    <ion-navbar>
+      <ion-title>Add Profile details</ion-title>
+    </ion-navbar>
+  </div>
+<!-- Profile Update -->
+  <div *ngIf="val===3">
+    <ion-navbar>
+      <ion-title>Update Profile details</ion-title>
+    </ion-navbar>
+  </div>
+</ion-header>
+
+
+<ion-content padding>
+  
+  <!-- Shop Add -->
+  <div *ngIf="val===0">
+    <form [formGroup]="SetupData">
+      <ion-item>
+        <ion-label>Shop Name: </ion-label>
+        <ion-input type="text" name="name" formControlName="name" [class.invalid]="!SetupData.controls.name.valid && SetupData.controls.name.touched"></ion-input>
+      </ion-item>
+      <p class="errorlabels" *ngIf="!SetupData.controls.name.valid && SetupData.controls.name.touched">
+        Please Enter Only Letters</p>
+
+
+      <ion-card>
+        <ion-card-header>Image: </ion-card-header>
+        <button ion-button (click)="presentActionSheet()" color="dark" block outline>Add Shop Picture</button>
+
+        <img [src]="imageURL" *ngIf="imageURL && !imageURL2" />
+        <img [src]="imageURL2" *ngIf="imageURL2" />
+        <img src="assets/imgs/Clothes.png" *ngIf="!imageURL && !imageURL2" />
+        <!-- <button ion-button (click)="upload()" *ngIf="imageURL2" block>Upload</button> -->
+
+      </ion-card>
+      <ion-item>
+        <ion-label>Location: </ion-label>
+      </ion-item>
+      <div *ngIf="locname">
+        <ion-label class="labels">Name: {{locname}}</ion-label>
+      </div>
+      <div *ngIf="lng">
+        <ion-label class="labels">longtitude: {{lng}}</ion-label>
+      </div>
+      <div *ngIf="lat">
+        <ion-label class="labels">latitude: {{lat}}</ion-label>
+      </div>
+      <button ion-button (click)="gotomap()" color="light" block outline>Go To Map</button>
+
+
+      <ion-item>
+        <ion-label>Notes: </ion-label>
+        <ion-textarea name="note" autocomplete="on" autocorrect="on" placeholder="Description about the shop" formControlName="note"
+          [class.invalid]="!SetupData.controls.note.valid && SetupData.controls.note.touched"></ion-textarea>
+      </ion-item>
+      <p class="errorlabels" *ngIf="!SetupData.controls.note.valid && SetupData.controls.note.touched">
+        Please Enter the minimum 20 letters of Description</p>
+
+      <ion-item>
+        <ion-label>Contact: (+94)</ion-label>
+        <ion-input type="number" name="contact" formControlName="contact" [class.invalid]="!SetupData.controls.contact.valid && SetupData.controls.contact.touched"></ion-input>
+      </ion-item>
+      <p class="errorlabels" *ngIf="!SetupData.controls.contact.valid && SetupData.controls.contact.touched">
+        Please Enter the Valid Number</p>
+
+
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="setup()" type="submit" color="light" round outline>Join</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+
+  <!-- Shop Update -->
+  <div *ngIf="val===1">
+
+    <form [formGroup]="SetupData">
+      <ion-list *ngFor="let value of array">
+        <ion-item>
+          <ion-label>Shop Name: </ion-label>
+          <ion-input type="text" name="name" value="{{value.Shopname}}" formControlName="name" [class.invalid]="!SetupData.controls.name.valid && SetupData.controls.name.touched"></ion-input>
+        </ion-item>
+        <p class="errorlabels" *ngIf="!SetupData.controls.name.valid && SetupData.controls.name.touched">
+          Please Enter Only Letters</p>
+
+
+        <ion-card>
+          <ion-card-header>Image: </ion-card-header>
+          <button ion-button (click)="presentActionSheet()" color="dark" block outline>Update Shop Picture</button>
+
+          <img [src]="value.Shopimage" *ngIf="value.Shopimage && !imageURL2" />
+          <img [src]="imageURL2" *ngIf="imageURL2" />
+          <img src="assets/imgs/Clothes.png" *ngIf="!value.Shopimage && !imageURL2" />
+          <!-- <button ion-button (click)="upload()" *ngIf="imageURL2" block>Upload</button> -->
+
+        </ion-card>
+        <ion-item>
+          <ion-label>Location: </ion-label>
+        </ion-item>
+
+
+        <div *ngIf="locname">
+          <ion-label class="labels">Name: {{locname}}</ion-label>
+        </div>
+
+        <div *ngIf="lng">
+          <ion-label class="labels">longtitude: {{lng}}</ion-label>
+        </div>
+
+        <div *ngIf="lat">
+          <ion-label class="labels">latitude: {{lat}}</ion-label>
+        </div>
+
+        <div *ngIf="value.Location && !locname">
+          <ion-label class="labels">Name: {{value.Location}}</ion-label>
+        </div>
+        <div *ngIf="value.Shoplongitude && !lng">
+          <ion-label class="labels">longtitude: {{value.Shoplongitude}}</ion-label>
+        </div>
+        <div *ngIf="value.Shoplatitude && !lat">
+          <ion-label class="labels">latitude: {{value.Shoplatitude}}</ion-label>
+        </div>
+
+        <button ion-button (click)="gotomap()" color="light" block outline>Go To Map</button>
+
+
+        <ion-item>
+          <ion-label>Notes: </ion-label>
+          <ion-textarea name="note" value="{{value.Shopnote}}" autocomplete="on" autocorrect="on" placeholder="Description about the shop"
+            formControlName="note" [class.invalid]="!SetupData.controls.note.valid && SetupData.controls.note.touched"></ion-textarea>
+        </ion-item>
+        <p class="errorlabels" *ngIf="!SetupData.controls.note.valid && SetupData.controls.note.touched">
+          Please Enter the minimum 20 letters of Description</p>
+
+        <ion-item>
+          <ion-label>Contact: (+94)</ion-label>
+          <ion-input type="number" value="{{value.contact}}" name="contact" formControlName="contact" [class.invalid]="!SetupData.controls.contact.valid && SetupData.controls.contact.touched"></ion-input>
+        </ion-item>
+        <p class="errorlabels" *ngIf="!SetupData.controls.contact.valid && SetupData.controls.contact.touched">
+          Please Enter the Valid Number</p>
+        <ion-row>
+          <ion-col>
+            <button ion-button (click)="update()" type="submit" color="light" round outline>Update</button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </form>
+
+  </div>
+
+  <!-- Profile Add -->
+  <div *ngIf="val===2">
+    <form [formGroup]="SetupData2">
+      <ion-item>
+        <ion-label>Username: </ion-label>
+        <ion-input type="text" name="username" formControlName="username" [class.invalid]="!SetupData2.controls.username.valid && SetupData2.controls.username.touched"></ion-input>
+      </ion-item>
+      <p class="errorlabels" *ngIf="!SetupData2.controls.username.valid && SetupData2.controls.username.touched">
+        Username must contain letters and numbers</p>
+
+
+      <ion-card>
+        <ion-card-header>Image: </ion-card-header>
+        <button ion-button (click)="presentActionSheet()" color="dark" block outline>Add Profile Picture</button>
+
+        <img [src]="imageURL" *ngIf="imageURL && !imageURL2" />
+        <img [src]="imageURL2" *ngIf="imageURL2" />
+        <img src="assets/imgs/Clothes.png" *ngIf="!imageURL && !imageURL2" />
+        <!-- <button ion-button (click)="upload()" *ngIf="imageURL2" block>Upload</button> -->
+
+      </ion-card>
+
+      <ion-item>
+        <ion-label>Contact: (+94)</ion-label>
+        <ion-input type="number" name="contact" formControlName="contact" [class.invalid]="!SetupData2.controls.contact.valid && SetupData2.controls.contact.touched"></ion-input>
+      </ion-item>
+      <p class="errorlabels" *ngIf="!SetupData2.controls.contact.valid && SetupData2.controls.contact.touched">
+        Please Enter the Valid Number</p>
+
+
+      <ion-row>
+        <ion-col>
+          <button ion-button (click)="setup2()" type="submit" color="light" round outline>Join</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+
+  <!-- Profile Update -->
+  <div *ngIf="val===3">
+    <form [formGroup]="SetupData2">
+      <ion-list *ngFor="let value of array">
+        <ion-item>
+          <ion-label>Username: </ion-label>
+          <ion-input type="text" name="username" value="{{value.username}}" formControlName="username" [class.invalid]="!SetupData2.controls.username.valid && SetupData2.controls.username.touched"></ion-input>
+        </ion-item>
+        <p class="errorlabels" *ngIf="!SetupData2.controls.username.valid && SetupData2.controls.username.touched">
+          Username must contain letters and numbers</p>
+
+
+        <ion-card>
+          <ion-card-header>Image: </ion-card-header>
+          <button ion-button (click)="presentActionSheet()" color="dark" block outline>Update Profile Picture</button>
+
+          <img [src]="value.image" *ngIf="value.image && !imageURL2" />
+          <img [src]="imageURL2" *ngIf="imageURL2" />
+          <img src="assets/imgs/Clothes.png" *ngIf="!value.image && !imageURL2" />
+          <!-- <button ion-button (click)="upload()" *ngIf="imageURL2" block>Upload</button> -->
+
+        </ion-card>
+
+        <ion-item>
+          <ion-label>Contact: (+94)</ion-label>
+          <ion-input type="number" name="contact" value="{{value.contact}}" formControlName="contact" [class.invalid]="!SetupData2.controls.contact.valid && SetupData2.controls.contact.touched"></ion-input>
+        </ion-item>
+        <p class="errorlabels" *ngIf="!SetupData2.controls.contact.valid && SetupData2.controls.contact.touched">
+          Please Enter the Valid Number</p>
+
+
+        <ion-row>
+          <ion-col>
+            <button ion-button (click)="update2()" type="submit" color="light" round outline>Update</button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </form>
+  </div>
+
+
+</ion-content>
